@@ -7,11 +7,15 @@ import { Provider } from "react-redux";
 import store from "./store";
 // import "babel-polyfill";
 
+import createBrowserHistory from 'history/createBrowserHistory'
+
+const customHistory = createBrowserHistory()
+
 const mountNode = document.getElementById("root");
 // console.log(<Routes />);
 const appRender = () => {
     ReactDOM.render(
-        <Provider store={store}>
+        <Provider store={store}  history={customHistory}>
             <BrowserRouter>
                 <Route component={AppComponent} />
             </BrowserRouter>

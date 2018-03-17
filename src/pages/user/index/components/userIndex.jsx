@@ -1,5 +1,5 @@
 import React from 'react';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 
 import UserInfoComponent from './userInfo';
 import UserHeaderComponent from './userHeader';
@@ -16,10 +16,11 @@ class UserIndexComponent extends React.Component{
     //     // console.log(helloWorldGenerator())
     // }
     render(){
+        console.log(this.props)
         return(
             <div>
-                <UserHeaderComponent/>
-                <UserInfoComponent/>
+                <UserHeaderComponent history={this.props.history}/>
+                <UserInfoComponent {...this.props}/>
                 <UserOrderComponent/>
                 <UserMenusComponent/>
             </div>
@@ -27,10 +28,10 @@ class UserIndexComponent extends React.Component{
     }
 }
 const mapStateToProps = (state)=>({
-
+    userInfo:state.userInfo
 })
 
 const mapDispatchToProps = (state)=>({
 
 })
-export default UserIndexComponent;
+export default connect(mapStateToProps,null)(UserIndexComponent);

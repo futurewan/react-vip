@@ -1,12 +1,13 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {List,InputItem ,Button,WingBlank,Toast} from 'antd-mobile'
-import {loginAction} from '../actions'
 
+import {RouteProps} from 'react-router-dom'
+
+import propTypes from 'prop-types';
 class LoginFormComponent extends React.Component{
     constructor(props){
         super(props);
-        console.log(props)
         this.state = {
             // canSubmit:false,//是否可以提交
             userName:{
@@ -18,12 +19,28 @@ class LoginFormComponent extends React.Component{
                 hasError:false
             }
         }
-        // console.log(helloWorldGenerator())
     }
     submitLogin(){
         this.props.login({
-            name:123
-        })
+            id: 112,
+            accId: 1088,
+            accountId: "14839999956613385119",
+            loginName: "18217210856",
+            phoneNum: "18217210856",
+            hasPayPassword: false,
+            email: "",
+            registeTime: 1474444124000,
+            lastLoginTime: 1516629775000,
+            lastLoginIp: "8.8.8.8",
+            realName: "万亚飞",
+            idCardNum: "321283234948884900",
+            bankName: "中国建设银行",
+            bankCode: "01050000",
+            bankCardNum: "43994049494885994",
+            headImage: "https://act.sy8.com/oldProduce/produce/user/20170216185259466.jpg",
+            idCardAuthenticate: false,
+            bankCardAuthenticate: false
+        });
     }
     changeValue(typeName,e){
         let canSub;
@@ -31,6 +48,7 @@ class LoginFormComponent extends React.Component{
         const value = e.replace(/\s/g,'');
         inputObj[typeName]={...this.state[typeName],value}
         this.setState(inputObj); //注意：this.state刚设置完state立即调用，是旧值
+        console.log(value,/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z_]{8,20}$/.test(value))
         if(
             (typeName === 'userName' && !/1(3[0-9]|5[012356789]|7[015678]|8[0-9]|4[57])\d{8}/.test(value)) ||
             (typeName === 'password' && !/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z_]{8,20}$/.test(value))
@@ -44,7 +62,7 @@ class LoginFormComponent extends React.Component{
         // } else{
         //     canSub=false;
         // }
-        return this.setState({...inputObj,canSubmit:canSub});
+        return this.setState(inputObj);
     }
     showError(typeName){
         let errInfo = '';
@@ -60,9 +78,17 @@ class LoginFormComponent extends React.Component{
     componentWillUpdate(){
         // console.log(this.state)
     }
+    componentDidUpdate(){
+        if(Object.keys(this.props.uesrInfo).length){
+            Toast.info('登陆成功！',3,()=>{
+                this.props.history.goBack();
+            });
+        }
+    }
     render(){
         let canSub = !this.state['userName'].hasError && this.state['userName'].value
         && !this.state['password'].hasError && this.state['password'].value;
+        
         return(
             <div className="mt20">
                 <List>
@@ -88,20 +114,16 @@ class LoginFormComponent extends React.Component{
                     <Button 
                         type="primary" 
                         onClick={this.submitLogin.bind(this)} 
-                        disabled={!this.state.canSub}
+                        disabled={!canSub}
                     >登录</Button>
                 </WingBlank>
             </div>
         )
     }
 }
-const mapStateToProps = (state)=>({
 
-})
+// LoginFormComponent.propTypes = {
+//     uesrInfo: propTypes.object.isRequired
+// };
 
-const mapDispatchToProps = (dispatch)=>({
-    login:(uesrInfo)=>{
-        dispatch(loginAction(uesrInfo))
-    }
-})
-export default connect(mapStateToProps,mapDispatchToProps)(LoginFormComponent);
+export default LoginFormComponent;

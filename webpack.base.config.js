@@ -10,7 +10,7 @@ const config = {
         verdor:['react','react-dom','react-redux']
     },
     output: {
-        path: path.join(__dirname, 'dist'),
+        path: path.join(__dirname, 'server/public'),
         publicPath: '/',
         filename: 'js/[name].js'
     },
@@ -56,7 +56,7 @@ const config = {
                     loader: 'url-loader',
                     options:{
                         limit: 10000,
-                        name: 'img/[name].[ext]?[hash]'
+                        name: 'imgs/[name].[ext]?[hash]'
                     }
                 }]
             }
@@ -68,8 +68,9 @@ const config = {
             minChunks: 2
         }),
         new HtmlWebpackPlugin({
-            filename: 'index.html',
-	        template: path.join(__dirname, 'src/index.html')
+            filename: '../views/index.html',
+            template: path.join(__dirname, 'src/index.html'),
+            favicon:path.join(__dirname, 'src/favicon.ico')
         })
     ]
 }

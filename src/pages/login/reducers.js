@@ -1,6 +1,6 @@
 import { LOGIN } from "./actionTypes";
 
-const initUserInfo = {
+const userInfoInterface = {
     id: 112,
     accId: 1088,
     accountId: "14839999956613385119",
@@ -21,9 +21,10 @@ const initUserInfo = {
     bankCardAuthenticate: false
 };
 
-export default (previousState = initUserInfo, action) => {
+export default (previousState = {}, action) => {
     switch (action.type) {
         case LOGIN:
+            console.log('action',action.userInfo)
             return action.userInfo;
         default:
             return previousState;

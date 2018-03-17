@@ -5,6 +5,7 @@ class NotFind extends React.Component{
     render(){
         return(
             <div>
+                not find<br/>
                 <Link to="/home">Home</Link>
                 <Link to="/login">Login</Link>
             </div>
