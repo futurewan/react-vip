@@ -1,12 +1,12 @@
 import React from 'react';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 
 import HomeHeaderComponent from './homeHeader';
 import MenuComponent from './menu';
 import BannerComponent from './banner';
 import SpecialSaleListComponent from './specialSaleList';
 import SamllCartComponent from '../../../components/smallCart/index'
-class Home extends React.Component{
+class HomeComponent extends React.Component{
     // constructor(){
     //     super();
     //     // console.log(helloWorldGenerator())
@@ -27,7 +27,9 @@ const mapStateToProps = (state)=>({
 
 })
 
-const mapDispatchToProps = (state)=>({
-
+const mapDispatchToProps = (dispatch)=>({
+    saleList:()=>{
+        dispatch()
+    }
 })
-export default Home;
+export default connect(null,mapDispatchToProps)(HomeComponent);

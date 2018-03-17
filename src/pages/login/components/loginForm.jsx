@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {List,InputItem ,Button,WingBlank,Toast} from 'antd-mobile'
 
 import {RouteProps} from 'react-router-dom'
-
+import {axiosAjax} from '../../../lib/api'
 import propTypes from 'prop-types';
 class LoginFormComponent extends React.Component{
     constructor(props){
@@ -20,27 +20,30 @@ class LoginFormComponent extends React.Component{
             }
         }
     }
+    componentWillMount(){
+        if(Object.keys(this.props.uesrInfo).length){
+            Toast.info('您已成功登陆，将返回上一页！',3,()=>{
+                this.props.history.goBack();
+            });
+        }
+    }
     submitLogin(){
-        this.props.login({
-            id: 112,
-            accId: 1088,
-            accountId: "14839999956613385119",
-            loginName: "18217210856",
-            phoneNum: "18217210856",
-            hasPayPassword: false,
-            email: "",
-            registeTime: 1474444124000,
-            lastLoginTime: 1516629775000,
-            lastLoginIp: "8.8.8.8",
-            realName: "万亚飞",
-            idCardNum: "321283234948884900",
-            bankName: "中国建设银行",
-            bankCode: "01050000",
-            bankCardNum: "43994049494885994",
-            headImage: "https://act.sy8.com/oldProduce/produce/user/20170216185259466.jpg",
-            idCardAuthenticate: false,
-            bankCardAuthenticate: false
-        });
+        axiosAjax({
+			url:'users',
+			params:{
+				iPage:1,
+				pageSize:3
+			}
+		}).then(data=>{
+            if(data.data.resCode === '0000'){
+                this.props.login(data.data.info);
+                Toast.info('登陆成功！',3,()=>{
+                    this.props.history.goBack();
+                });
+            } else{
+                Toast.info(data.data.resDesc)
+            }
+        })
     }
     changeValue(typeName,e){
         let canSub;
@@ -79,11 +82,7 @@ class LoginFormComponent extends React.Component{
         // console.log(this.state)
     }
     componentDidUpdate(){
-        if(Object.keys(this.props.uesrInfo).length){
-            Toast.info('登陆成功！',3,()=>{
-                this.props.history.goBack();
-            });
-        }
+        
     }
     render(){
         let canSub = !this.state['userName'].hasError && this.state['userName'].value
@@ -122,8 +121,8 @@ class LoginFormComponent extends React.Component{
     }
 }
 
-// LoginFormComponent.propTypes = {
-//     uesrInfo: propTypes.object.isRequired
-// };
+LoginFormComponent.propTypes = {
+    uesrInfo: propTypes.object.isRequired
+};
 
 export default LoginFormComponent;

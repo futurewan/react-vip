@@ -1,4 +1,5 @@
 import React from "react";
+import {axiosAjax} from '../../../lib/api';
 const brandsdata = require("../../../assets/database/specialSaleList.json");
 class SpecialSaleListComponent extends React.Component {
     constructor() {
@@ -8,6 +9,21 @@ class SpecialSaleListComponent extends React.Component {
             brands: brandsdata[0].result.data.brands
         };
     }
+
+    componentWillMount(){
+        axiosAjax({
+			url:'users',
+			params:{
+				iPage:1,
+				pageSize:3
+			}
+		}).then(data=>{
+            console.log(data)
+        })
+    }
+
+
+
     pms_activetips(pms_activetips){
         if (pms_activetips) {
             return(<div className="pms">

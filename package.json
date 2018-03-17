@@ -38,6 +38,7 @@
   },
   "dependencies": {
     "antd-mobile": "^2.1.6",
+    "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",

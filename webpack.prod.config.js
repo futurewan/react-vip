@@ -12,11 +12,11 @@ module.exports = merge(baseConfig, {
         filename: 'js/[name].[chunkhash:10].js'
     },
     plugins: [
-        new CleanWebpackPlugin(['./server/public/'],['./server/views/']),
+        new CleanWebpackPlugin(['./server/public/','./server/views/']),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('production')
         }),
         new ExtractTextPlugin('css/[name].[contenthash:10].css'),
-        // new UglifyJSPlugin()
+        new UglifyJSPlugin()
     ]
 })
