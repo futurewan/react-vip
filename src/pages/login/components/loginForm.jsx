@@ -29,15 +29,16 @@ class LoginFormComponent extends React.Component{
     }
     submitLogin(){
         axiosAjax({
-			url:'users',
-			params:{
-				iPage:1,
-				pageSize:3
+            url:'/users',
+            method:'post',
+			data:{
+				userName:this.state.userName.value,
+				password:this.state.password.value
 			}
 		}).then(data=>{
             if(data.data.resCode === '0000'){
                 this.props.login(data.data.info);
-                Toast.info('登陆成功！',3,()=>{
+                Toast.info('登录成功！',3,()=>{
                     this.props.history.goBack();
                 });
             } else{

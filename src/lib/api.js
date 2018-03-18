@@ -12,22 +12,22 @@ export const axiosAjax = function(opts) {
         data: {},
         responseType: "json", // default
         //允许在请求数据发送到服务器之前对其进行更改
-        transformRequest: [
-            function(data) {
-                // 做任何你想要的数据转换
-                return data;
-            }
-        ],
+        // transformRequest: [
+        //     function(data) {
+        //         // 做任何你想要的数据转换
+        //         return data;
+        //     }
+        // ],
         // `transformResponse`允许在 then / catch之前对响应数据进行更改
-        transformResponse: [
-            function(data) {
-                // Do whatever you want to transform the data
-                return data;
-            }
-        ]
+        // transformResponse: [
+        //     function(data) {
+        //         // Do whatever you want to transform the data
+        //         return data;
+        //     }
+        // ]
     };
     const options = Object.assign({}, defaults, opts);
-
+    console.log(options)
     return axios(options);
 };
 

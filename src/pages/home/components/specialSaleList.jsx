@@ -11,15 +11,15 @@ class SpecialSaleListComponent extends React.Component {
     }
 
     componentWillMount(){
-        axiosAjax({
-			url:'users',
-			params:{
-				iPage:1,
-				pageSize:3
-			}
-		}).then(data=>{
-            console.log(data)
-        })
+        // axiosAjax({
+		// 	url:'users',
+		// 	params:{
+		// 		iPage:1,
+		// 		pageSize:3
+		// 	}
+		// }).then(data=>{
+        //     console.log(data)
+        // })
     }
 
 
