@@ -51,8 +51,7 @@ class LoginFormComponent extends React.Component{
         const inputObj = {};
         const value = e.replace(/\s/g,'');
         inputObj[typeName]={...this.state[typeName],value}
-        this.setState(inputObj); //注意：this.state刚设置完state立即调用，是旧值
-        console.log(value,/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z_]{8,20}$/.test(value))
+        // this.setState(inputObj); //注意：this.state刚设置完state立即调用，是旧值
         if(
             (typeName === 'userName' && !/1(3[0-9]|5[012356789]|7[015678]|8[0-9]|4[57])\d{8}/.test(value)) ||
             (typeName === 'password' && !/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z_]{8,20}$/.test(value))
@@ -79,10 +78,25 @@ class LoginFormComponent extends React.Component{
         }
         Toast.info(errInfo);
     }
+
+    componentWillReceiveProps(nextProps,nextState){
+        console.log(111);
+        this.setState({
+            userName:{
+                value:'2222',
+                hasError:false
+            }
+        })
+    }
+    shouldComponentUpdate(nextProps,nextState){
+        console.log(nextState);
+        return true;
+    }
     componentWillUpdate(){
-        // console.log(this.state)
+        console.log('willupdate',this.state);
     }
     componentDidUpdate(){
+        console.log('didupdate',this.state);
         
     }
     render(){
@@ -90,7 +104,7 @@ class LoginFormComponent extends React.Component{
         && !this.state['password'].hasError && this.state['password'].value;
         
         return(
-            <div className="mt20">
+            <div>
                 <List>
                     <InputItem
                         type="phone"

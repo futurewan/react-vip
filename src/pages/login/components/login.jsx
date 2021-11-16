@@ -6,7 +6,13 @@ import {loginAction} from '../actions'
 
 
 class LoginComponent extends React.Component {
+    force(){
+        console.log(this)
+        this.forceUpdate();
+    }
+    
     render() {
+        console.log('renderp')
         return (
             <div>
                 <NavBar

@@ -10,7 +10,6 @@ const config = {
         verdor:['react','react-dom','react-redux']
     },
     output: {
-        path: path.join(__dirname, 'server/public'),
         publicPath: '/',
         filename: 'js/[name].js'
     },
@@ -64,13 +63,8 @@ const config = {
     },
     plugins: [
         new webpack.optimize.CommonsChunkPlugin({
-            name: ["common","vendor",'runtime'],
+            name: ["vendor",'runtime'],
             minChunks: 2
-        }),
-        new HtmlWebpackPlugin({
-            filename: '../views/index.html',
-            template: path.join(__dirname, 'src/index.html'),
-            favicon:path.join(__dirname, 'src/favicon.ico')
         })
     ]
 }
