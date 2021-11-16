@@ -19,7 +19,8 @@ class AppComponent extends Component {
         return(
             <div>
                 <AppRoutes/>
-                { /* <Link to="/home">Home</Link>
+                { 
+                /* <Link to="/home">Home</Link>
                 <Link to="/login">Login</Link> */
                 }
             </div>
